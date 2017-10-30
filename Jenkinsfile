@@ -1,24 +1,14 @@
-pipeline {
-    agent {
-        docker {
-            image 'node:6.9.4-onbuild'
-            args '-p 3000:3000'
-        }
-    }
-    environment {
-        CI = 'true'
-    }
-    stages {
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+
+node {
+	try {
         stage('Build') {
-            steps {
-                sh 'npm install'
-            }
+            sh 'npm install'
         }
         stage ('Docker Build & Push') {
-            steps {
-                sh 'docker build -t keystoneesp_image .'
-                sh 'docker push keystoneesp_image'
-            }
+            sh 'docker build -t keystoneesp_image .'
+            sh 'docker push keystoneesp_image'
         }
-    }
+	}
 }
