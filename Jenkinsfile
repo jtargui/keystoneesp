@@ -16,8 +16,8 @@ pipeline {
         }
         stage ('Docker Build & Push') {
             steps {
-                sh 'sudo docker build -t keystoneesp_image .'
-                sh 'sudo docker push keystoneesp_image'
+                sh 'docker build -t keystoneesp_image .'
+                sh 'docker push keystoneesp_image'
             }
         }
     }
