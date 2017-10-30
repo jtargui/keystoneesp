@@ -1,0 +1,2 @@
+npm i -g yo
+npm install -g generator-keystone
