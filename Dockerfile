@@ -18,6 +18,7 @@ RUN npm install
 
 # Bundle app source
 COPY /cms /usr/src/app
+COPY ./init.sh /usr/src/app
 #COPY /cms/node_modules-keystone-node_modules-bson-ext-index.js /usr/src/app/node_modules/bson/ext/index.js
 
 ##################### INSTALLATION END #####################
