@@ -24,6 +24,7 @@ node {
     }
 
     stage('Deploy to DEV') {
-        sh './jenkins/scripts/run.sh'
+        docker.image("keystoneesp_image").withRun("--rm -P --net=host --volumes-from keystoneesp_volume -p 127.0.0.1:5432:5432 --name keystoneesp_instance keystoneesp_image") {
+        }
     }
 }
