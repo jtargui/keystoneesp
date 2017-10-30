@@ -12,7 +12,7 @@ node {
          * docker build on the command line */
 
         app = docker.build("keystoneesp_image")
-        sh 'docker rmi $(docker images |grep 'keystoneesp_instance')'
+        sh "'docker rm -f $(docker ps | grep 'keystoneesp_instance')"
         app.withRun("--name keystoneesp_volume keystoneesp_image"){
         }
     }
