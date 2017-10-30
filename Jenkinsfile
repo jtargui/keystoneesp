@@ -12,9 +12,6 @@ node {
          * docker build on the command line */
 
         app = docker.build("keystoneesp_image")
-        sh "'docker rm -f $(docker ps | grep 'keystoneesp_instance')"
-        app.withRun("--name keystoneesp_volume keystoneesp_image"){
-        }
     }
 
     stage('Test image') {
@@ -27,7 +24,7 @@ node {
     }
 
     stage('Deploy to DEV') {
-        docker.image("keystoneesp_image").withRun("--rm -P --net=host --volumes-from keystoneesp_volume -p 127.0.0.1:5432:5432 --name keystoneesp_instance keystoneesp_image") {
+        docker.image("keystoneesp_image").withRun("--rm -P --net=host -p 127.0.0.1:5432:5432 --name keystoneesp_instance keystoneesp_image") {
         }
     }
 }
