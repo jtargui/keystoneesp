@@ -24,6 +24,6 @@ node {
     }
 
     stage('Deploy to DEV') {
-        sh 'sudo ./jenkins/scripts/run.sh'
+        sh './jenkins/scripts/run.sh'
     }
 }
