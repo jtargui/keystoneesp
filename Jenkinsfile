@@ -14,5 +14,11 @@ pipeline {
                 sh 'npm install'
             }
         }
+        stage ('Docker Build & Push') {
+            steps {
+                sh 'sudo docker build -t keystoneesp_image .'
+                sh 'sudo docker push keystoneesp_image'
+            }
+        }
     }
 }
