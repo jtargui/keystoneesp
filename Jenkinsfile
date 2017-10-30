@@ -12,6 +12,8 @@ node {
          * docker build on the command line */
 
         app = docker.build("keystoneesp_image")
+        app.withRun("--name $VOLUME_NAME $IMAGE_NAME"){
+        }
     }
 
     stage('Test image') {
