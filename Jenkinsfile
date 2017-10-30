@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("keystoneesp")
+        app = docker.build("keystoneesp_image")
     }
 
     stage('Test image') {
@@ -21,5 +21,9 @@ node {
         app.inside {
             sh 'echo "Tests passed"'
         }
+    }
+
+    stage('Deploy to DEV') {
+        sh 'run.sh'
     }
 }
