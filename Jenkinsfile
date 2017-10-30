@@ -1,18 +1,25 @@
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
-
 node {
-	try {
-        stage('Build') {
-            steps{
-                sh 'npm install'
-            }
+    def app
+
+    stage('Clone repository') {
+        /* Let's make sure we have the repository cloned to our workspace */
+
+        checkout scm
+    }
+
+    stage('Build image') {
+        /* This builds the actual image; synonymous to
+         * docker build on the command line */
+
+        app = docker.build("keystoneesp")
+    }
+
+    stage('Test image') {
+        /* Ideally, we would run a test framework against our image.
+         * For this example, we're using a Volkswagen-type approach ;-) */
+
+        app.inside {
+            sh 'echo "Tests passed"'
         }
-        stage ('Docker Build & Push') {
-            steps{
-                sh 'docker build -t keystoneesp_image .'
-                sh 'docker push keystoneesp_image'
-            }
-        }
-	}
+    }
 }
