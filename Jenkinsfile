@@ -12,7 +12,7 @@ node {
          * docker build on the command line */
 
         app = docker.build("keystoneesp_image")
-        app.withRun("--name $VOLUME_NAME $IMAGE_NAME"){
+        app.withRun("--name keystoneesp_volume keystoneesp_image"){
         }
     }
 
