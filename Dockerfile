@@ -7,6 +7,8 @@ FROM node:6.9.4-onbuild
 MAINTAINER Jordi Targa <jtargui@gmail.com>
 
 ################## BEGIN INSTALLATION ######################
+RUN apt-get update && \
+      apt-get -y install sudo
 
 # Create app directory
 RUN mkdir -p /usr/src/app
