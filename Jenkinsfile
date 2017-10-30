@@ -24,7 +24,7 @@ node {
     }
 
     stage('Deploy to DEV') {
-        sh 'docker rm -f $(docker ps | grep "keystoneesp_instance")'
+        sh './jenkins/scripts/init.sh'
         app.withRun("-P --net=host -p 127.0.0.1:5432:5432 --name keystoneesp_instance") {
         }
     }
