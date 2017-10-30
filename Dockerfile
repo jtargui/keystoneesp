@@ -8,13 +8,6 @@ MAINTAINER Jordi Targa <jtargui@gmail.com>
 
 ################## BEGIN INSTALLATION ######################
 
-RUN apt-get update && \
-      apt-get -y install sudo
-
-RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
-USER docker
-CMD /bin/bash
-
 # Create app directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
