@@ -9,7 +9,7 @@ node {
     }
 
     stage('Test') {
-        sh 'cd var/jenkins/workspace/keystoneesp && npm test'
+        sh 'cd /var/jenkins/workspace/keystoneesp && npm test'
     }
 
     stage('Build image') {
