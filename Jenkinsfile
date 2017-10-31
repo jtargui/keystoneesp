@@ -7,7 +7,7 @@ node {
 
     stage('Build image') {
         sh './jenkins/scripts/init.sh'
-        app = docker.build("jtargui/keystoneesp")
+        app = docker.build("keystoneesp")
     }
 
     stage('Test image') {
