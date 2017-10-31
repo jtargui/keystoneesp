@@ -7,6 +7,7 @@ node {
 	def namespace = 'jtargui'
 	def config = 'keystoneesp'
 	def emailList = 'jtargui@gmail.com'
+    def app
 
 	try {
 		stage('Checkout') {
@@ -28,6 +29,11 @@ node {
 				"""
 			}
 		}
+
+        stage ('Docker Build & Push') {
+            app = docker.build(${registryurl}/${namespace}/${microservice})
+        }
+
 	} catch (e) {
 		currentBuild.result = "FAILED"
 		throw e
