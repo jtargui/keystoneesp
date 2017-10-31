@@ -31,8 +31,9 @@ node {
     }
 
     stage('Deploy to DEV') {
-        sh "docker login -u jtargui -p h6y50k93 https://registry.hub.docker.com"
-        sh "docker pull ${namespace}/${microservice}"
+        sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui --password-stdin https://registry.hub.docker.com "
+        sh "docker stop keystoneesp && docker rm keystoneesp"
+        sh "docker run -d --restart always -i --name keystoneesp -p https://registry.hub.docker.com/jtargui/keystoneesp"
     }
 
 }
