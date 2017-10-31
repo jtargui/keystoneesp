@@ -18,7 +18,7 @@ then
     set +x
 else
     echo "Create container"
-    set -x
-    docker run -d --name $VOLUME_NAME $IMAGE_NAME echo "keystoneesp"
-    set +x
+    #set -x
+    #docker run -d --name $VOLUME_NAME $IMAGE_NAME echo "keystoneesp"
+    #set +x
 fi

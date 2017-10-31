@@ -6,14 +6,18 @@ node {
     }
 
     stage('Build image') {
-        steps {
-            sh './jenkins/scripts/init.sh'
+        sh './jenkins/scripts/init.sh'
+        app = docker.build("keystoneesp_image")
+    }
+
+    stage('Test image') {
+        app.inside {
+            sh 'echo "Tests passed"'
         }
     }
 
     stage('Deploy to DEV') {
-        steps{
-            sh './jenkins/script/run.sh'
+        app.withRun("-P --net=host -p 127.0.0.1:5432:5432 --name keystoneesp_instance") {
         }
     }
 }
