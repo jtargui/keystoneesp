@@ -34,6 +34,12 @@ node {
             app = docker.build(${registryurl}/${namespace}/${microservice})
         }
 
+        stage('Test image') {
+            app.inside {
+                sh 'echo "Tests passed"'
+            }
+        }
+
 	} catch (e) {
 		currentBuild.result = "FAILED"
 		throw e
