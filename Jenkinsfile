@@ -11,17 +11,10 @@ node {
 
     stage('Checkout') {
         checkout scm
-        sh """
-            git config user.email "jtargui@gmail.com"
-            git config user.name "jtargui"
-            git config push.default simple
-        """
     }
 
     stage ('Docker Build & Push') {
-        steps{
             app = docker.build(${namespace}/${microservice})
-        }
     }
 
     stage('Test image') {
@@ -29,9 +22,5 @@ node {
             sh 'echo "Tests passed"'
         }
     }
-}
-
-def getShell() {
-	return new GroovyShell()
 }
 
