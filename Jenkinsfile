@@ -20,7 +20,9 @@ node {
 		}
 
         stage ('Docker Build & Push') {
-            app = docker.build(${registryurl}/${namespace}/${microservice})
+            steps{
+                app = docker.build(${registryurl}/${namespace}/${microservice})
+            }
         }
 
         stage('Test image') {
