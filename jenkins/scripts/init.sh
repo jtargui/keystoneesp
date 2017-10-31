@@ -7,7 +7,7 @@ DOCKER_INSTANCE_NAME="keystoneesp_instance"
 #echo $IMAGE_NAME
 #docker build -t $IMAGE_NAME .
 
-RESULT_CONTAINER_ID="$(docker ps -a | grep $VOLUME_NAME | tr -s " " | cut -d' ' -f1 | tr '\n' ' ')"
+RESULT_CONTAINER_ID="$(docker ps -a | grep $DOCKER_INSTANCE_NAME | tr -s " " | cut -d' ' -f1 | tr '\n' ' ')"
 if [ "$RESULT_CONTAINER_ID" != '' ]
 then
     echo "Container exist"
