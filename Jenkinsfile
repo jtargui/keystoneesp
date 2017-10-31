@@ -31,7 +31,7 @@ node {
     }
 
     stage('Deploy to DEV') {
-        sh "docker pull keystoneesp"
+        sh "docker pull ${namespace}/${microservice}"
     }
 
 }
