@@ -18,14 +18,7 @@ node {
 
     stage('Deploy to DEV') {
         app.withRun("-P --net=host -p 127.0.0.1:5432:5432 --name keystoneesp_instance") {
-        }
-    }
-
-    stage('Test') {
-        app.inside {
             sh 'npm test'
         }
     }
-
-
 }
