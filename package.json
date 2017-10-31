@@ -5,7 +5,7 @@
   "main": "keystone.js",
   "scripts": {
     "lint": "eslint .",
-    "start": "node keystone.js",
+    "start": "node cms/keystone.js",
     "test": "./node_modules/.bin/mocha ./tests/*_tests.js"
   },
   "dependencies": {
