@@ -7,7 +7,7 @@ node {
 
     stage('Build image') {
         sh './jenkins/scripts/init.sh'
-        app = docker.build("keystoneesp")
+        app = docker.build("jtargui/keystoneesp")
     }
 
     stage('Test image') {
@@ -22,7 +22,6 @@ node {
              * Second, the 'latest' tag.
              * Pushing multiple tags is cheap, as all the layers are reused. */
             docker.withRegistry('https://registry.hub.docker.com', 'docker-registry-credentials') {
-                app.push("${env.BUILD_NUMBER}")
                 app.push("latest")
             }
         }
