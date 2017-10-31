@@ -21,7 +21,7 @@ node {
 
         stage ('Docker Build & Push') {
             steps{
-                app = docker.build(${registryurl}/${namespace}/${microservice})
+                app = docker.build(${namespace}/${microservice})
             }
         }
 
