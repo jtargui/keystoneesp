@@ -19,17 +19,6 @@ node {
 			"""
 		}
 
-		stage('Checkout Config') {
-			checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${config}"]], submoduleCfg: [], userRemoteConfigs: [[url: "https://github.com/${jtargui}/${config}.git"]]]
-			dir ("${config}") {
-				sh """
-				git config user.email "jtargui@gmail.com"
-				git config user.name "jtargui"
-				git config push.default simple
-				"""
-			}
-		}
-
         stage ('Docker Build & Push') {
             app = docker.build(${registryurl}/${namespace}/${microservice})
         }
