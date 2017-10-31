@@ -1,24 +1,42 @@
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+
 node {
-    def app
+	def microservice = 'keystoneesp'
+	def registryurl = 'hub.docker.com'
+	def namespace = 'jtargui'
+	def config = 'keystoneesp'
+	def emailList = 'jtargui@gmail.com'
 
-    stage('Clone repository') {
-        checkout scm
-    }
+	try {
+		stage('Checkout') {
+			checkout scm
+			sh """
+				git config user.email "jtargui@gmail.com"
+				git config user.name "jtargui"
+				git config push.default simple
+			"""
+		}
 
-    stage('Build image') {
-        sh './jenkins/scripts/init.sh'
-        app = docker.build("keystoneesp_image")
-    }
+		stage('Checkout Config') {
+			checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${config}"]], submoduleCfg: [], userRemoteConfigs: [[url: "https://github.com/${jtargui}/${config}.git"]]]
+			dir ("${config}") {
+				sh """
+				git config user.email "jtargui@gmail.com"
+				git config user.name "jtargui"
+				git config push.default simple
+				"""
+			}
+		}
+	} catch (e) {
+		currentBuild.result = "FAILED"
+		throw e
+	} finally {
 
-    stage('Test image') {
-        app.inside {
-            sh 'echo "Tests passed"'
-        }
-    }
-
-    stage('Deploy to DEV') {
-        app.withRun("-P --net=host -p 127.0.0.1:5432:5432 --name keystoneesp_instance") {
-            sh 'npm /usr/src/app/test'
-        }
-    }
+	}
 }
+
+def getShell() {
+	return new GroovyShell()
+}
+
