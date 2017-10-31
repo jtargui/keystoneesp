@@ -6,7 +6,9 @@ node {
     }
 
     stage('Build image') {
-        sh './jenkins/scripts/init.sh'
+        steps {
+            sh './jenkins/scripts/init.sh'
+        }
     }
 
     stage('Test image') {
@@ -16,6 +18,8 @@ node {
     }
 
     stage('Deploy to DEV') {
-        sh './jenkins/script/run.sh'
+        steps{
+            sh './jenkins/script/run.sh'
+        }
     }
 }
