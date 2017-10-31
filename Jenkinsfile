@@ -10,6 +10,7 @@ node {
 
     stage('Build image') {
         app = docker.build("${namespace}/${microservice}")
+        sh "docker build -t ${namespace}/${microservice} ."
     }
 
     stage('Test image') {
