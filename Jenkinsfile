@@ -31,6 +31,7 @@ node {
     }
 
     stage('Deploy to DEV') {
+        sh "docker login -u jtargui -p h6y50k93 https://registry.hub.docker.com"
         sh "docker pull ${namespace}/${microservice}"
     }
 
