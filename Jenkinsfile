@@ -9,7 +9,6 @@ node {
     }
 
     stage('Build image') {
-        sh './jenkins/scripts/init.sh'
         app = docker.build(${namespace}+"/"+${microservice})
     }
 
