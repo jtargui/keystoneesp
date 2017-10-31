@@ -28,4 +28,11 @@ node {
         app.withRun("-P --net=host -p 127.0.0.1:5432:5432 --name keystoneesp_instance") {
         }
     }
+    post{
+        always {
+            script {
+                app.stop()
+            }
+        }
+    }
 }

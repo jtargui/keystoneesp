@@ -11,7 +11,9 @@ RESULT_CONTAINER_ID="$(docker ps -a | grep $VOLUME_NAME | tr -s " " | cut -d' ' 
 if [ "$RESULT_CONTAINER_ID" != '' ]
 then
     echo "Container exist"
+    set -x
     docker rm -f $RESULT_CONTAINER_ID
+    set +x
 else
     echo "Create container"
     #docker run --rm -P --net=host --volumes-from $VOLUME_NAME -p 127.0.0.1:5432:5432 --name $DOCKER_INSTANCE_NAME $IMAGE_NAME
