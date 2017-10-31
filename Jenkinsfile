@@ -1,5 +1,8 @@
 node {
     def app
+	def microservice = 'keystoneesp'
+	def registryurl = 'https://registry.hub.docker.com'
+	def namespace = 'jtargui'
 
     stage('Clone repository') {
         checkout scm
@@ -7,7 +10,7 @@ node {
 
     stage('Build image') {
         sh './jenkins/scripts/init.sh'
-        app = docker.build("jtargui/keystoneesp")
+        app = docker.build(${namespace}+"/"+${microservice})
     }
 
     stage('Test image') {
