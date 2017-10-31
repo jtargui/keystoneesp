@@ -9,34 +9,26 @@ node {
 	def emailList = 'jtargui@gmail.com'
     def app
 
-	try {
-		stage('Checkout') {
-			checkout scm
-			sh """
-				git config user.email "jtargui@gmail.com"
-				git config user.name "jtargui"
-				git config push.default simple
-			"""
-		}
+    stage('Checkout') {
+        checkout scm
+        sh """
+            git config user.email "jtargui@gmail.com"
+            git config user.name "jtargui"
+            git config push.default simple
+        """
+    }
 
-        stage ('Docker Build & Push') {
-            steps{
-                app = docker.build(${namespace}/${microservice})
-            }
+    stage ('Docker Build & Push') {
+        steps{
+            app = docker.build(${namespace}/${microservice})
         }
+    }
 
-        stage('Test image') {
-            app.inside {
-                sh 'echo "Tests passed"'
-            }
+    stage('Test image') {
+        app.inside {
+            sh 'echo "Tests passed"'
         }
-
-	} catch (e) {
-		currentBuild.result = "FAILED"
-		throw e
-	} finally {
-
-	}
+    }
 }
 
 def getShell() {
