@@ -11,12 +11,6 @@ node {
         }
     }
 
-    stage('Test image') {
-        app.inside {
-            sh 'echo "Tests passed"'
-        }
-    }
-
     stage('Deploy to DEV') {
         steps{
             sh './jenkins/script/run.sh'
