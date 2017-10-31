@@ -12,10 +12,6 @@ node {
         app = docker.build("${namespace}/${microservice}")
     }
 
-    stage('Test') {
-        sh './jenkins/scripts/init.sh'
-    }
-
     stage('Test image') {
         app.inside {
             sh 'echo "Tests passed"'
