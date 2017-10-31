@@ -1,20 +1,13 @@
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
-
 node {
-	def microservice = 'keystoneesp'
-	def registryurl = 'hub.docker.com'
-	def namespace = 'jtargui'
-	def config = 'keystoneesp'
-	def emailList = 'jtargui@gmail.com'
     def app
 
-    stage('Checkout') {
+    stage('Clone repository') {
         checkout scm
     }
 
-    stage ('Docker Build & Push') {
-            app = docker.build(${namespace}/${microservice})
+    stage('Build image') {
+        sh './jenkins/scripts/init.sh'
+        app = docker.build("keystoneesp_image")
     }
 
     stage('Test image') {
@@ -23,4 +16,3 @@ node {
         }
     }
 }
-
