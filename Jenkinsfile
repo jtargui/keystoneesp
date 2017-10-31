@@ -13,7 +13,7 @@ node {
     }
 
     stage('Test') {
-        sh 'cd /var/jenkins_home/workspace/keystoneesp && npm test'
+        sh './jenkins/scripts/init.sh'
     }
 
     stage('Test image') {
