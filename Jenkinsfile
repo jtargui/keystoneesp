@@ -32,8 +32,7 @@ node {
 
     stage('Deploy to DEV') {
         sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui -p h6y50k93 https://registry.hub.docker.com"
-
-        sh "docker run -d --restart always -i --name keystoneesp -p https://registry.hub.docker.com/jtargui/keystoneesp"
+        sh "docker run --rm -P --net=host -p 127.0.0.1:5432:5432 --name ${microservice} ${namespace}/${microservice}"
     }
 
 }
