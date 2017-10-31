@@ -8,12 +8,12 @@ node {
         checkout scm
     }
 
-    stage('Test') {
-        sh 'cd /var/jenkins_home/workspace/keystoneesp && npm test'
-    }
-
     stage('Build image') {
         app = docker.build("${namespace}/${microservice}")
+    }
+
+    stage('Test') {
+        sh 'cd /var/jenkins_home/workspace/keystoneesp && npm test'
     }
 
     stage('Test image') {
