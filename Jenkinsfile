@@ -31,7 +31,7 @@ node {
     }
 
     stage('Deploy to DEV') {
-        sh "./jenkins/scripts/run.sh"
+        sh "docker pull keystoneesp"
     }
 
 }
