@@ -33,7 +33,9 @@ node {
 
 
     stage('Deploy to DEV') {
-        sh "docker rmi -f ${instance}/${microservice}"
+        sh "set -e && docker rmi -f ${instance}/${microservice} && set +e"
+        sh "set -e && docker stop ${instance} && set +e"
+        sh "set -e && docker rm -f ${instance} && set +e"
         sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui -p h6y50k93 ${registryurl}"
         sh "docker pull ${namespace}/${microservice}"
         sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${namespace}/${microservice}"
