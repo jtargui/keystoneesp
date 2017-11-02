@@ -47,4 +47,8 @@ node {
         sh "docker pull ${registryurl}/${namespace}/${microservice}"
         sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${registryurl}/${namespace}/${microservice}"
     }
+
+    stage('Test') {
+        sh "npm test"
+    }
 }
