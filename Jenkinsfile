@@ -20,15 +20,18 @@ node {
     }
 
     stage('Push image') {
+        sh "docker push localhost:5000/jtargui/keystone_image"
+
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
-         * Pushing multiple tags is cheap, as all the layers are reused. */
+         * Pushing multiple tags is cheap, as all the layers are reused.
         docker.withRegistry(${registryurl}) {
             //sh "docker login -u jtargui -p h6y50k93 ${registryurl}"
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
+        */
     }
 
     /*
