@@ -33,7 +33,7 @@ node {
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused.
         docker.withRegistry(${registryurl}) {
-            //sh "docker login -u jtargui -p h6y50k93 ${registryurl}"
+            //sh "docker login -u jtarga -p h6y50k93 ${registryurl}"
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
@@ -43,7 +43,7 @@ node {
     stage('Deploy to DEV') {
         sh "docker rmi -f ${registryurl}/${namespace}/${microservice}"
         //sh "docker rm -f ${instance}"
-        sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui -p h6y50k93 ${registryurl}"
+        sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtarga -p h6y50k93 ${registryurl}"
         sh "docker pull ${registryurl}/${namespace}/${microservice}"
         sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${registryurl}/${namespace}/${microservice}"
     }
