@@ -34,7 +34,7 @@ node {
 
     stage('Deploy to DEV') {
         sh "docker rmi -f ${namespace}/${microservice} 2> /dev/null"
-        sh "IF [$(docker ps -a | grep keystoneesp_instance | tr -s " " | cut -d' ' -f1 | tr '\n' ' ') != ''] THEN docker stop ${instance} && docker rm -f ${instance}"
+        sh "docker stop ${instance} && docker rm -f ${instance}"
         sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui -p h6y50k93 ${registryurl}"
         sh "docker pull ${namespace}/${microservice}"
         sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${namespace}/${microservice}"
