@@ -1,7 +1,7 @@
 node {
     def app
 	def microservice = 'keystoneesp'
-	def volumeName = 'keystoneesp
+	def volumeName = 'keystoneesp'
 	def registryurl = 'https://registry.hub.docker.com'
 	def namespace = 'jtargui'
 
