@@ -10,12 +10,18 @@ node {
     }
 
     stage('Build image') {
-        sh "docker build -t ${microservice} ."
+        app = docker.build("${registryurl}/${namespace}/${microservice}")
+    }
+
+    stage('Test image') {
+        app.inside {
+            sh 'echo "Tests passed"'
+        }
     }
 
     stage('Deploy to DEV') {
         sh "docker stop ${instance}"
         sh "docker rm -f ${instance}"
-        sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${microservice}"
+        sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${registryurl}/${instance}/${microservice}"
     }
 }
