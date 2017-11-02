@@ -1,7 +1,7 @@
 node {
     def app
-	def microservice = 'keystoneesp'
-	def instance = 'keystoneespInstance'
+	def microservice = 'keystoneesp_image'
+	def instance = 'keystoneesp_instance'
 	def registryurl = 'https://registry.hub.docker.com'
 	def namespace = 'jtargui'
 
@@ -10,14 +10,7 @@ node {
     }
 
     stage('Build image') {
-        app = docker.build("${microservice}")
         sh "docker build -t ${microservice} ."
-    }
-
-    stage('Test image') {
-        app.inside {
-            sh 'echo "Tests passed"'
-        }
     }
 
     stage('Deploy to DEV') {
