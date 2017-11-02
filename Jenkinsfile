@@ -20,7 +20,7 @@ node {
     }
 
     stage('Push image') {
-        sh "docker tag ${registryurl}/${namespace}/${microservice}:${env.BUILD_NUMBER} ${registryurl}/${namespace}/${microservice}"
+        sh "docker tag ${registryurl}/${namespace}/${microservice} ${registryurl}/${namespace}/${microservice}:${env.BUILD_NUMBER}"
         sh "docker push ${registryurl}/${namespace}/${microservice}:${env.BUILD_NUMBER}"
 
         sh "docker tag ${registryurl}/${namespace}/${microservice} ${registryurl}/${namespace}/${microservice}"
