@@ -4,4 +4,6 @@ VOLUME_NAME="keystoneesp_volume"
 DOCKER_INSTANCE_NAME="keystoneesp_instance"
 
 #--volumes-from $VOLUME_NAME
-docker run --rm -P --net=host -p 127.0.0.1:5432:5432 --name $DOCKER_INSTANCE_NAME $IMAGE_NAME
+docker stop $DOCKER_INSTANCE_NAME
+docker rm -f $DOCKER_INSTANCE_NAME
+docker run -d --net=host -i --restart always --name $DOCKER_INSTANCE_NAME -p 80:80 $IMAGE_NAME
