@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-IMAGE_NAME="keystoneesp_image"
+IMAGE_NAME="jtargui/keystoneesp_image"
 VOLUME_NAME="keystoneesp_volume"
 DOCKER_INSTANCE_NAME="keystoneesp_instance"
 
