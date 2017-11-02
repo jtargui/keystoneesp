@@ -20,8 +20,7 @@ node {
     }
 
     stage('Push image') {
-        sh "docker push ${registryurl}/${namespace}/${microservice}:${env.BUILD_NUMBER}"
-        sh "docker push ${registryurl}/${namespace}/${microservice}:latest"
+        sh "docker push ${registryurl}/${namespace}/${microservice}"
 
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
