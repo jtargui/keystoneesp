@@ -20,6 +20,7 @@ node {
     }
 
     stage('Push image') {
+        sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui -p h6y50k93 ${registryurl}"
         sh "docker tag ${registryurl}/${namespace}/${microservice} ${registryurl}/${namespace}/${microservice}:${env.BUILD_NUMBER}"
         sh "docker push ${registryurl}/${namespace}/${microservice}:${env.BUILD_NUMBER}"
 
@@ -42,7 +43,7 @@ node {
     stage('Deploy to DEV') {
         sh "docker rmi -f ${registryurl}/${namespace}/${microservice}"
         sh "docker rm -f ${instance}"
-        //sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui -p h6y50k93 ${registryurl}"
+        sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui -p h6y50k93 ${registryurl}"
         sh "docker pull ${registryurl}/${namespace}/${microservice}"
         sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${registryurl}/${namespace}/${microservice}"
     }
