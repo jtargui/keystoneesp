@@ -49,6 +49,7 @@ node {
     }
 
     stage('Test') {
+        sh "export PATH=/usr/local/bin"
         sh "npm test"
     }
 }
