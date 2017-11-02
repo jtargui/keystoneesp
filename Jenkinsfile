@@ -19,9 +19,21 @@ node {
         }
     }
 
+    stage('Push image') {
+        /* Finally, we'll push the image with two tags:
+         * First, the incremental build number from Jenkins
+         * Second, the 'latest' tag.
+         * Pushing multiple tags is cheap, as all the layers are reused. */
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-registry-credentials') {
+            sh "docker login -u jtargui -p h6y50k93 ${registryurl}"
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+        }
+    }
+
+
     stage('Deploy to DEV') {
-        sh "docker stop ${instance}"
-        sh "docker rm -f ${instance}"
+        sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui -p h6y50k93 https://registry.hub.docker.com"
         sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${registryurl}/${instance}/${microservice}"
     }
 }
