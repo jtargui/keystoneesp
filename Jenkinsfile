@@ -31,7 +31,7 @@ node {
         }
     }
 
-
+    /*
     stage('Deploy to DEV') {
         sh "docker rmi -f ${namespace}/${microservice}"
         sh "docker rm -f ${instance}"
@@ -39,4 +39,5 @@ node {
         sh "docker pull ${namespace}/${microservice}"
         sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${namespace}/${microservice}"
     }
+    */
 }
