@@ -23,7 +23,7 @@ node {
         sh "docker tag ${registryurl}/${namespace}/${microservice} ${registryurl}/${namespace}/${microservice}:${env.BUILD_NUMBER}"
         sh "docker push ${registryurl}/${namespace}/${microservice}:${env.BUILD_NUMBER}"
 
-        sh "docker tag ${registryurl}/${namespace}/${microservice} ${registryurl}/${namespace}/${microservice}"
+        sh "docker tag ${registryurl}/${namespace}/${microservice} ${registryurl}/${namespace}/${microservice} "
         sh "docker push ${registryurl}/${namespace}/${microservice}"
 
 
