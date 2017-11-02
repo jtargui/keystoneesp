@@ -49,7 +49,7 @@ node {
     }
 
     stage('Test') {
-        sh "export PATH=/usr/local/bin"
+        sh "export PATH=/home/jtarga/Dev/node-v8.7.0-linux-x64/bin/"    //Remove it!!
         sh "npm test"
     }
 }
