@@ -1,7 +1,7 @@
 node {
     def app
 	def microservice = 'keystoneesp'
-	def volumeName = 'keystoneesp_volume'
+	def instance = 'keystoneespInstance'
 	def registryurl = 'https://registry.hub.docker.com'
 	def namespace = 'jtargui'
 
@@ -21,7 +21,6 @@ node {
     }
 
     stage('Deploy to DEV') {
-        sh "docker run -d --name ${volumeName} ${microservice}"
-        sh "docker run --rm -P --net=host --volumes-from ${volumeName} -p 127.0.0.1:5432:5432 --name ${microservice} ${microservice}"
+        sh "docker run --rm -P --net=host -p 127.0.0.1:5432:5432 --name ${instance} ${microservice}"
     }
 }
