@@ -34,6 +34,6 @@ node {
 
     stage('Deploy to DEV') {
         sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui -p h6y50k93 https://registry.hub.docker.com"
-        sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${registryurl}/${instance}/${microservice}"
+        sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${registryurl}/${namespace}/${microservice}"
     }
 }
