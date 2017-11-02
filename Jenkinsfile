@@ -35,7 +35,7 @@ node {
     stage('Deploy to DEV') {
         sh "docker rmi -f ${namespace}/${microservice}"
         sh "docker ps -q --filter ancestor=${namespace}/${microservice} | xargs -r docker stop"
-        sh "docker ps -q --filter ancestor=${namespace}/${microservice} | xargs -r docker rm -f"
+        sh "docker rm -v $(docker ps -a -q -f status=exited)"
         sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui -p h6y50k93 ${registryurl}"
         sh "docker pull ${namespace}/${microservice}"
         sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${namespace}/${microservice}"
