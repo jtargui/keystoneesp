@@ -16,6 +16,6 @@ node {
     stage('Deploy to DEV') {
         sh "docker stop ${instance}"
         sh "docker rm -f ${instance}"
-        sh "docker run -d -i --restart --net=host --name ${instance} -p 80:80 ${microservice}"
+        sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${microservice}
     }
 }
