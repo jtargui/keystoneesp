@@ -17,7 +17,6 @@ node {
     stage('Test image') {
         app.inside {
             sh 'echo "Tests passed"'
-            sh '/usr/src/app/node_modules/.bin/mocha'
             sh 'npm test'
         }
     }
