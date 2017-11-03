@@ -4,6 +4,6 @@ var expect = chai.expect;
 
 describe('Simple test', function() {
     it("Simple test", function() {
-        expect("25250").to.equal("25250");
+        expect("25250").to.equal("25249");
     });
 });
