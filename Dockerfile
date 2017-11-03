@@ -14,10 +14,6 @@ RUN apt-get update && \
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-# Create test directory
-RUN mkdir -p /usr/src/app/tests
-COPY /tests /usr/src/app/tests
-
 # Install app dependencies
 COPY package.json /usr/src/app/
 RUN npm install
