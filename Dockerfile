@@ -18,9 +18,6 @@ WORKDIR /usr/src/app
 RUN mkdir -p /usr/src/app/tests
 COPY /tests /usr/src/app/tests
 
-# This docker file isnot for production.
-RUN npm config set -g production false
-
 # Install app dependencies
 COPY package.json /usr/src/app/
 RUN npm install
