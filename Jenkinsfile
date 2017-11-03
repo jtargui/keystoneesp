@@ -16,9 +16,6 @@ node {
 
     stage('Test image') {
         app.inside {
-            //sh 'echo "Tests passed"'
-            //sh 'npm install -g mocha'
-            //sh 'npm install --save-dev chai'
             sh 'npm install --only=dev'
             sh 'npm test'
         }
@@ -47,7 +44,7 @@ node {
 
     stage('Deploy to DEV') {
         sh "docker rmi -f ${registryurl}/${namespace}/${microservice}"
-        sh "docker rm -f ${instance}"
+        //sh "docker rm -f ${instance}"
         sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui -p h6y50k93 ${registryurl}"
         sh "docker pull ${registryurl}/${namespace}/${microservice}"
         sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${registryurl}/${namespace}/${microservice}"
