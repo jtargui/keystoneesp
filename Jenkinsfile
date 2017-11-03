@@ -10,7 +10,7 @@ node {
     }
 
     stage('Test'){
-         def node = tool name: 'Node-7.4.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+         def node = tool name: 'Node-6.11.4', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
          env.PATH = "${node}/bin:${env.PATH}"
          //env.NODE_ENV = "test"
          //print "Environment will be : ${env.NODE_ENV}"
