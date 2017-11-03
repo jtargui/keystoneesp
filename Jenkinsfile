@@ -19,7 +19,7 @@ node {
             //sh 'echo "Tests passed"'
             //sh 'npm install -g mocha'
             //sh 'npm install --save-dev chai'
-            sh 'npm install --dev'
+            sh 'npm install --only=dev'
             sh 'npm test'
         }
     }
