@@ -47,7 +47,7 @@ node {
         sh "docker rm -f ${instance}"
         sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui -p h6y50k93 ${registryurl}"
         sh "docker pull ${registryurl}/${namespace}/${microservice}"
-        sh "docker run -d --net=host -i -v /opt/apache-jmeter-3.3/:/opt/apache-jmeter-3.3/ --restart always --name ${instance} -p 80:80 ${registryurl}/${namespace}/${microservice}"
+        sh "docker run -d --net=host -i -v /opt/apache-jmeter-3.3:/opt/apache-jmeter-3.3 --restart always --name ${instance} -p 80:80 ${registryurl}/${namespace}/${microservice}"
     }
 
      stage ('Run JMeter Test') {
