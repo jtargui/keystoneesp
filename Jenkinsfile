@@ -9,6 +9,15 @@ node {
         checkout scm
     }
 
+    stage('Test'){
+         //env.NODE_ENV = "test"
+         //print "Environment will be : ${env.NODE_ENV}"
+         sh 'node -v'
+         sh 'npm prune'
+         sh 'npm install'
+         sh 'npm test'
+    }
+
     stage('Build image') {
         app = docker.build("${registryurl}/${namespace}/${microservice}")
     }
@@ -46,10 +55,5 @@ node {
         sh "cat /home/jtarga/docker-registry-pass.txt | docker login -u jtargui -p h6y50k93 ${registryurl}"
         sh "docker pull ${registryurl}/${namespace}/${microservice}"
         sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${registryurl}/${namespace}/${microservice}"
-    }
-
-    stage('Test') {
-        sh "export PATH=/usr/bin:$PATH"    //Remove it!!
-        sh "./usr/bin/npm test"
     }
 }
