@@ -9,16 +9,6 @@ node {
         checkout scm
     }
 
-    stage('Test'){
-         def node = tool name: 'Node-6.11.4', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-         env.PATH = "${node}/bin:${env.PATH}"
-         env.NODE_ENV = "test"
-         print "Environment will be : ${env.NODE_ENV}"
-         sh 'node -v'
-         sh 'npm prune'
-         sh 'npm install'
-         sh 'npm test'
-    }
 
     stage('Build image') {
         app = docker.build("${registryurl}/${namespace}/${microservice}")
@@ -27,6 +17,7 @@ node {
     stage('Test image') {
         app.inside {
             sh 'echo "Tests passed"'
+            sh 'npm test'
         }
     }
 
