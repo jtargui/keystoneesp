@@ -18,6 +18,7 @@ node {
         app.inside {
             sh 'echo "Tests passed"'
             sh 'npm install -g mocha'
+            sh 'npm install -g chai'
             sh 'npm test'
         }
     }
