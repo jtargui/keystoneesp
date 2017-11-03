@@ -49,4 +49,8 @@ node {
         sh "docker pull ${registryurl}/${namespace}/${microservice}"
         sh "docker run -d --net=host -i --restart always --name ${instance} -p 80:80 ${registryurl}/${namespace}/${microservice}"
     }
+
+     stage ('Run JMeter Test') {
+        sh 'java -Dfile.encoding=UTF-8 -classpath /opt/apache-jmeter-3.3/bin/ApacheJMeter.jar org.apache.jmeter.NewDriver --testfile /media/jtarga/MainDisk/DevTutorials/keystoneesp/tests/tests.jmx -n'
+     }
 }
