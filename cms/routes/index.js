@@ -127,3 +127,37 @@ exports = module.exports = function (app) {
     }
 
 };
+
+function esCPValido (unCp){
+	unCp = "" + unCp;
+	var patt1 = /[0-9]{5}/g;
+
+	if(! unCp.match(patt1)){
+		return "No tiene 5 caracteres";
+	}
+
+	if(unCp.match(patt1)[0] != unCp){
+		return "No tiene 5 caracteres";
+	}
+
+	if( parseInt(unCp.substr(0, 2)) == 0 ){
+		return "No puede comenzar con 00";
+	}
+
+	if( parseInt(unCp.substr(0, 2)) > 52 ){
+		return "No puede comenzar con código mayor a 52";
+	}
+
+	if( parseInt(unCp.substr(2, 3)) == 0 ){
+		return "No puede finalizar con 000";
+	}
+
+	if(parseInt(unCp) > 52006){
+		return "No puede ser superior a 52006";
+	}
+
+	return "";
+
+}
+
+exports.esCPValido = esCPValido;
