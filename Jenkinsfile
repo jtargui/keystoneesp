@@ -50,6 +50,6 @@ node {
 
     stage('Test') {
         sh "export PATH=/usr/bin:$PATH"    //Remove it!!
-        sh "npm test"
+        sh "./usr/bin/npm test"
     }
 }
