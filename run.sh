@@ -6,4 +6,4 @@ DOCKER_INSTANCE_NAME="keystoneesp_instance"
 #--volumes-from $VOLUME_NAME
 docker stop $DOCKER_INSTANCE_NAME
 docker rm -f $DOCKER_INSTANCE_NAME
-docker run -d --net=host -i --name $DOCKER_INSTANCE_NAME -p 80:80 $IMAGE_NAME
+docker run -d --net=host -i -v /opt/apache-jmeter-3.3/:/opt/apache-jmeter-3.3/ --name $DOCKER_INSTANCE_NAME -p 80:80 $IMAGE_NAME
